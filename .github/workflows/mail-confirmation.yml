@@ -1,5 +1,5 @@
 name: Send email on Pull Request merge to master
-
+#
 on:
   # pull_request:
   #   types:
@@ -17,12 +17,11 @@ jobs:
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
-          connection_url: ${{secrets.MAIL_CONNECTION_URL}}
           server_address: smtp.gmail.com
-          # server_port: 465
+          server_port: 465
           secure: true
-          # username: ${{secrets.MAIL_USERNAME}}
-          # password: ${{secrets.MAIL_PASSWORD}}
+          username: ${{secrets.MAIL_USERNAME}}
+          password: ${{secrets.MAIL_PASSWORD}}
           subject: A pull request has been merged to master branch on ${{github.repository}}
           to: vargas.christian@correounivalle.edu.co, samuel.galindo@correounivalle.edu.co, john.freddy.belalcazar@correounivalle.edu.co
           from: Tickets Univalle 
