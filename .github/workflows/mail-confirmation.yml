@@ -1,14 +1,17 @@
 name: Send email on Pull Request merge to master
 
 on:
-  pull_request:
-    types:
-      - closed
+  # pull_request:
+  #   types:
+  #     - closed
+  push:
+    branches:
+      - develop
 
 jobs:
   send-email:
     runs-on: ubuntu-latest
-    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
 
     steps:
       - name: Send email
