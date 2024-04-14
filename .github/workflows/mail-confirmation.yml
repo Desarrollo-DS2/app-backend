@@ -1,17 +1,14 @@
 name: Send email on Pull Request merge to master
 
 on:
-  # pull_request:
-  #   types:
-  #     - closed
-  push:
-    branches:
-      - develop
+  pull_request:
+    types:
+      - closed
 
 jobs:
   send-email:
     runs-on: ubuntu-latest
-    # if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
     env:
       TZ: America/Bogota
 
@@ -35,7 +32,7 @@ jobs:
 
           subject: A pull request has been merged to master branch on ${{github.repository}}
 
-          to: vargas.christian@correounivalle.edu.co #, samuel.galindo@correounivalle.edu.co, john.freddy.belalcazar@correounivalle.edu.co
+          to: vargas.christian@correounivalle.edu.co, samuel.galindo@correounivalle.edu.co, john.freddy.belalcazar@correounivalle.edu.co
 
           from: Tickets Univalle 
 
