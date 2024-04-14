@@ -1,5 +1,5 @@
 name: Send email on Pull Request merge to master
-#
+
 on:
   # pull_request:
   #   types:
