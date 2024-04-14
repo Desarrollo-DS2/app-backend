@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  app-backend:
+    build: .
+    image: app-backend
+    restart: always
+    ports:
+      - "8001:8001"
+    volumes:
+      - app-backend:/src
+
+volumes:
+  app-backend:
