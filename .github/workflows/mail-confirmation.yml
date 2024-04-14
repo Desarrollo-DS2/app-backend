@@ -9,18 +9,40 @@ jobs:
   send-email:
     runs-on: ubuntu-latest
     if: github.event.pull_request.merged == true && github.event.pull_request.base.ref == 'master'
+    env:
+      TZ: America/Bogota
 
     steps:
+      - name: Get current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+
       - name: Send email
         uses: dawidd6/action-send-mail@v3
         with:
           server_address: smtp.gmail.com
+
           server_port: 465
+
           secure: true
+
           username: ${{secrets.MAIL_USERNAME}}
+
           password: ${{secrets.MAIL_PASSWORD}}
+
           subject: A pull request has been merged to master branch on ${{github.repository}}
+
           to: vargas.christian@correounivalle.edu.co, samuel.galindo@correounivalle.edu.co, john.freddy.belalcazar@correounivalle.edu.co
+
           from: Tickets Univalle 
-          body: This is an automated email to notify you that a pull request has been merged to the master branch on ${{github.repository}}. Please review the changes and verify that everything is working as expected.\n\n$(date)\n\nTickets Univalle.
+
+          body: |
+            This is an automated email to notify you that a pull request has been merged to the master branch on ${{github.repository}}.
+            
+            Please review the changes and verify that everything is working as expected.
+
+            Date: ${{steps.date.outputs.date}}
+
+            Tickets Univalle Team
+
           reply_to: ${{secrets.MAIL_USERNAME}}
