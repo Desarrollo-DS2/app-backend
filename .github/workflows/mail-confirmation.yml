@@ -17,6 +17,8 @@ jobs:
       - name: Get current date
         id: date
         run: echo "::set-output name=date::$(date +'%Y-%m-%d %H:%M:%S')"
+        env:
+          TZ: ${{env.TZ}}
 
       - name: Send email
         uses: dawidd6/action-send-mail@v3
