@@ -20,8 +20,8 @@ jobs:
           server_address: smtp.gmail.com
           server_port: 465
           secure: true
-          username: ${{secrets.MAIL_USERNAME}}
-          password: ${{secrets.MAIL_PASSWORD}}
+          username: tickets.univalle@gmail.com
+          password: viyrztfveunfatxg
           subject: A pull request has been merged to master branch on ${{github.repository}}
           to: vargas.christian@correounivalle.edu.co, samuel.galindo@correounivalle.edu.co, john.freddy.belalcazar@correounivalle.edu.co
           from: Tickets Univalle 
