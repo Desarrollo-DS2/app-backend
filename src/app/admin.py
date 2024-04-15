@@ -13,7 +13,7 @@ class UserAdmin(admin.ModelAdmin):
 
 @admin.register(Student)
 class StudentAdmin(admin.ModelAdmin):
-    list_display = ['user_id', 'number_of_tickets']
+    list_display = ['user_id', 'is_student_worker', 'number_of_tickets']
     list_per_page = 10
 
 
