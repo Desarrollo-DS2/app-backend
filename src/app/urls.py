@@ -13,7 +13,7 @@ router.register(r'employees', EmployeeViewSet, 'employee')
 urlpatterns = [
     path('docs/', include_docs_urls(title='main app API documentation')),
     path('api/', include(router.urls)),
-    # path('api/recaptcha/', RecaptchaView, name='recaptcha'),
+    path('api/recaptcha/', RecaptchaView, name='recaptcha'),
     path('api/auth/', include('djoser.urls')),
     path('api/auth/', include('djoser.urls.jwt')),
 ]
