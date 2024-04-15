@@ -26,6 +26,8 @@ INSTALLED_APPS = [
     "src.app",
 ]
 
+AUTH_USER_MODEL = "app.User"
+
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
@@ -109,3 +111,7 @@ CORS_ALLOWED_ORIGINS = []
 
 if DEBUG:
     CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
+
+REST_FRAMEWORK = {
+    "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+}
