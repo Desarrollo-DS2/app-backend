@@ -2,41 +2,45 @@ from .user_serializer import UserSerializer
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 from django.db import transaction
+from ..models.user_model import User
 from ..models.employee_model import Employee
 
 
 class EmployeeSerializer(UserSerializer):
-    email = serializers.EmailField(source='user.email')
+    email = serializers.EmailField(source='user.email', read_only=True)
 
     user_id = serializers.CharField(source='user.user_id')
 
-    first_name = serializers.CharField(source='user.first_name')
+    first_name = serializers.CharField(
+        source='user.first_name', read_only=True)
 
     middle_name = serializers.CharField(
-        source='user.middle_name', allow_blank=True, allow_null=True)
+        source='user.middle_name', read_only=True)
 
-    last_name = serializers.CharField(source='user.last_name')
+    last_name = serializers.CharField(source='user.last_name', read_only=True)
 
     second_last_name = serializers.CharField(
-        source='user.second_last_name', allow_blank=True, allow_null=True)
+        source='user.second_last_name', read_only=True)
 
     contact_number = serializers.CharField(
-        source='user.contact_number', allow_blank=True, allow_null=True)
+        source='user.contact_number', read_only=True)
 
     address = serializers.CharField(
-        source='user.address', allow_blank=True, allow_null=True)
+        source='user.address', read_only=True)
 
     city = serializers.CharField(
-        source='user.city', allow_blank=True, allow_null=True)
+        source='user.city', read_only=True)
 
     birth_date = serializers.DateField(
-        source='user.birth_date', allow_null=True)
+        source='user.birth_date', read_only=True)
 
-    is_staff = serializers.BooleanField(source='user.is_staff')
+    is_staff = serializers.BooleanField(source='user.is_staff', read_only=True)
 
-    is_superuser = serializers.BooleanField(source='user.is_superuser')
+    is_superuser = serializers.BooleanField(
+        source='user.is_superuser', read_only=True)
 
-    password = serializers.CharField(source='user.password', write_only=True)
+    password = serializers.CharField(
+        source='user.password', allow_blank=True, allow_null=True, write_only=True)
 
     class Meta(UserSerializer.Meta):
         model = Employee
@@ -47,7 +51,8 @@ class EmployeeSerializer(UserSerializer):
         user_data = validated_data.pop('user')
 
         try:
-            user = super().create(user_data)
+            user = User.objects.get(user_id=user_data['user_id'])
+
             employee = Employee.objects.create(user=user, **validated_data)
             return employee
 

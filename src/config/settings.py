@@ -1,6 +1,7 @@
 from pathlib import Path
 from decouple import config
 import dj_database_url
+from datetime import timedelta
 import os
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent
@@ -65,12 +66,13 @@ DATABASES = {
     "default": dj_database_url.config(default=config("DATABASE_URL"))
 }
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = config('EMAIL_HOST')
-EMAIL_HOST_USER = config('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
-EMAIL_PORT = config('EMAIL_PORT', cast=int)
-EMAIL_USE_TLS = config('EMAIL_USE_TLS', default=True, cast=bool)
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = config("EMAIL_HOST")
+EMAIL_HOST_USER = config("EMAIL_HOST_USER")
+EMAIL_HOST_PASSWORD = config("EMAIL_HOST_PASSWORD")
+EMAIL_PORT = config("EMAIL_PORT", cast=int)
+EMAIL_USE_TLS = config("EMAIL_USE_TLS", default=True, cast=bool)
 
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -101,8 +103,8 @@ USE_TZ = True
 STATIC_URL = "static/"
 
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -112,6 +114,36 @@ CORS_ALLOWED_ORIGINS = []
 if DEBUG:
     CORS_ALLOWED_ORIGINS.append("http://localhost:3000")
 
+
 REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+
     "DEFAULT_SCHEMA_CLASS": "rest_framework.schemas.coreapi.AutoSchema",
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=5),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=90),
+    "ROTATE_REFRESH_TOKENS": True,
+    "BLACKLIST_AFTER_ROTATION": True,
+    "UPDATE_LAST_LOGIN": False,
+
+    "USER_ID_FIELD": "email",
+    "TOKEN_OBTAIN_SERIALIZER": "src.app.serializers.token_serializer.TokenPairSerializer",
+}
+
+DJOSER = {
+    "LOGIN_FIELD": "email",
+    "USER_ID_FIELD": "email",
+    "SEND_CONFIRMATION_EMAIL": True,
+    "PASSWORD_CHANGED_EMAIL_CONFIRMATION": True,
+    "PASSWORD_RESET_CONFIRM_URL": "password/reset/confirm/{uid}/{token}",
+
+    "SERIALIZERS": {
+        "user_create": "src.app.serializers.user_serializer.UserSerializer",
+        "user": "src.app.serializers.user_serializer.UserSerializer",
+    }
 }
