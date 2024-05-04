@@ -31,9 +31,9 @@ jobs:
         run: |
           flake8
 
-      - name: Coverage report
-        run: |
-          pytest --cov=.
+    #   - name: Coverage report
+    #     run: |
+    #       pytest --cov=.
       
       - name: Django testing
         run: |
