@@ -11,7 +11,9 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
+    env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        
     steps:
       - uses: actions/checkout@v3
 
@@ -36,5 +38,4 @@ jobs:
       - name: Django testing
         run: |
           pytest
-        env:
-          SECRET_KEY: ${{ secrets.SECRET_KEY }}
+
