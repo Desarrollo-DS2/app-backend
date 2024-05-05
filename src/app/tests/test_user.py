@@ -1,4 +1,4 @@
-from . import general_setup
+from . import test_setup
 import pytest
 from ..models.user_model import User
 
