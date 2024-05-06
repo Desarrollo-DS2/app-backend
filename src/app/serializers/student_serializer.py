@@ -40,7 +40,7 @@ class StudentSerializer(UserSerializer):
         source='user.is_superuser', read_only=True)
 
     password = serializers.CharField(
-        source='user.password', allow_blank=True, allow_null=True, write_only=True)
+        source='user.password', allow_blank=True, allow_null=True, write_only=True, required=False)
 
     class Meta(UserSerializer.Meta):
         model = Student

@@ -144,3 +144,9 @@ htmlcov/
 *.cover
 .coverage_report/
 coverage.xml
+
+# SonarQube
+.sonar/
+.sonarqube/
+.scannerwork/
+sonar-project.properties
