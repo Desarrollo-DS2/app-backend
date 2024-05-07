@@ -3,16 +3,23 @@ name: Django Tests
 on:
   push:
     branches:
-      - master
       - develop
   pull_request:
     branches:
-      - master
       - develop
 
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+        SECRET_KEY: ${{ secrets.SECRET_KEY }}
+        DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        EMAIL_HOST : ${{ secrets.EMAIL_HOST }}
+        EMAIL_HOST_USER: ${{ secrets.EMAIL_HOST_USER }}
+        EMAIL_HOST_PASSWORD: ${{ secrets.EMAIL_HOST_PASSWORD }}
+        EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
+        EMAIL_USE_TLS: ${{ secrets.EMAIL_USE_TLS }}
+        RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
 
     steps:
       - uses: actions/checkout@v3
@@ -38,3 +45,4 @@ jobs:
       - name: Django testing
         run: |
           pytest
+
