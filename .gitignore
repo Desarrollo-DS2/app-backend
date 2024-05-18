@@ -149,4 +149,4 @@ coverage.xml
 .sonar/
 .sonarqube/
 .scannerwork/
-sonar-project.properties
+# sonar-project.properties
