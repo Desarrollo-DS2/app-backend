@@ -20,6 +20,8 @@ jobs:
         EMAIL_PORT: ${{ secrets.EMAIL_PORT }}
         EMAIL_USE_TLS: ${{ secrets.EMAIL_USE_TLS }}
         RECAPTCHA_SECRET_KEY: ${{ secrets.RECAPTCHA_SECRET_KEY }}
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v3
@@ -41,8 +43,12 @@ jobs:
       - name: Coverage report
         run: |
           pytest --cov=.
+          coverage xml
       
       - name: Django testing
         run: |
-          pytest
+          pytest --cov=.
 
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+    
