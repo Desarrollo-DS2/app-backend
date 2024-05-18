@@ -1,7 +1,10 @@
 from django.urls import path, include
 from rest_framework import routers
 from rest_framework.documentation import include_docs_urls
-from .views import *
+from .views.user_view import UserViewSet
+from .views.student_view import StudentViewSet
+from .views.employee_view import EmployeeViewSet
+from .views.recaptcha_view import RecaptchaView
 
 
 router = routers.DefaultRouter()
