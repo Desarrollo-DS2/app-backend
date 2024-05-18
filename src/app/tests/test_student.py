@@ -31,7 +31,7 @@ def test_student(db):
 
 
 def test_student_is_student_worker(test_student):
-    assert test_student.get_is_student_worker() == False
+    assert not test_student.get_is_student_worker()
 
 
 def test_student_number_of_tickets(test_student):
