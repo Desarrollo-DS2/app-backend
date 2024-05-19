@@ -1,9 +1,10 @@
 import pytest
 from django.contrib.auth import get_user_model
 from ..serializers.user_serializer import UserSerializer
+from .test_user import test_user
 
 User = get_user_model()
-
+'''
 @pytest.fixture
 def test_user(db):
     email = 'prueba@gmail.com'
@@ -32,7 +33,8 @@ def test_user(db):
     yield User.objects.get(email=email)
 
     User.objects.get(email=email).delete()
-
+'''
+#@pytest.fixture
 def test_user_serializer(test_user):
     serializer = UserSerializer(test_user)
     data = serializer.data
