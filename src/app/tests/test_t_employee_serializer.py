@@ -2,7 +2,6 @@ import pytest
 from django.contrib.auth import get_user_model
 from ..serializers.employee_serializer import EmployeeSerializer
 from ..models.employee_model import Employee
-from .test_user import test_user
 
 User = get_user_model()
 

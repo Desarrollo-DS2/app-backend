@@ -1,40 +1,9 @@
 import pytest
 from django.contrib.auth import get_user_model
 from ..serializers.user_serializer import UserSerializer
-from .test_user import test_user
 
 User = get_user_model()
-'''
-@pytest.fixture
-def test_user(db):
-    email = 'prueba@gmail.com'
-    user_id = '10101010'
-    first_name = 'Prueba'
-    last_name = 'Prueba'
-    second_last_name = 'Prueba'
-    contact_number = '1234567890'
-    address = 'Avenue XX Street YY'
-    city = 'Cali'
-    birth_date = '2024-01-01'
-    is_active = True
-    is_staff = False
-    is_superuser = False
-    password = 'Password123@'    
 
-    if not User.objects.filter(email=email).exists():
-        user = User.objects.create(
-            email=email, user_id=user_id, first_name=first_name, last_name=last_name,
-            second_last_name=second_last_name, contact_number=contact_number, address=address,
-            city=city, birth_date=birth_date, is_active=is_active, is_staff=is_staff, is_superuser=is_superuser 
-            )
-        user.set_password(password)
-        user.save()
-
-    yield User.objects.get(email=email)
-
-    User.objects.get(email=email).delete()
-'''
-#@pytest.fixture
 def test_user_serializer(test_user):
     serializer = UserSerializer(test_user)
     data = serializer.data
@@ -54,18 +23,18 @@ def test_user_serializer(test_user):
     
 def test_password_validation(db):
     test_user_data = {
-    'email': 'prueba@gmail.com',
-    'user_id': '10101010',
-    'first_name': 'Prueba',
-    'last_name': 'Prueba',
-    'second_last_name': 'Prueba',
-    'contact_number': '1234567890',
-    'address': 'Avenue XX Street YY',
-    'city': 'Cali',
-    'birth_date': '2024-01-01',
-    'is_staff': False,
-    'is_superuser': False,
-    'password': 'Password123@'
+        'email': 'prueba@gmail.com',
+        'user_id': '10101010',
+        'first_name': 'Prueba',
+        'last_name': 'Prueba',
+        'second_last_name': 'Prueba',
+        'contact_number': '1234567890',
+        'address': 'Avenue XX Street YY',
+        'city': 'Cali',
+        'birth_date': '2024-01-01',
+        'is_staff': False,
+        'is_superuser': False,
+        'password': 'Password123@'
     }
         
     # Prueba de contraseña demasiado corta
