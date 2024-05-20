@@ -1,7 +1,5 @@
 import pytest
 from ..serializers.token_serializer import TokenPairSerializer
-from rest_framework_simplejwt.tokens import RefreshToken
-from rest_framework.test import APIClient
 from django.contrib.auth import get_user_model
 
 User = get_user_model()
