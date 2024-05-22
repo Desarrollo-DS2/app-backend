@@ -72,6 +72,9 @@ class User(AbstractBaseUser, PermissionsMixin):
     def get_contact_number(self):
         return self.contact_number
 
+    def get_contact_number_with_code(self):
+        return f'+57 {self.contact_number}'
+
     def get_address(self):
         return self.address
 
